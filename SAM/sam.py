@@ -18,7 +18,7 @@ class SAM(Module):
 
     def first_step(self, rho: float, grads: List[JaxArray]):
         assert len(grads) == len(self.train_vars), 'Expecting as many gradients as trainable variables'
-        # create empty state dict
+        # Create empty state dict
         self.state = defaultdict(dict)
         # norm grads
         grad_norm = self._grad_norm(grads)
@@ -37,9 +37,8 @@ class SAM(Module):
 
         self.base_optimizer(lr, grads)
 
-    @staticmethod
-    def _grad_norm(grads):
-        norm = jn.linalg.norm(jn.stack([jn.linalg.norm(g, ord = 2) for g in grads]), ord = 2)
+    def _grad_norm(self, grads):
+        norm = jn.linalg.norm(jn.stack([jn.linalg.norm(g) for g in grads]))
         return norm
 
     def __repr__(self):
