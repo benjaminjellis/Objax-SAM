@@ -85,7 +85,8 @@ if __name__ == "__main__":
         train_dl = tqdm(train_dl)
         loss = 0
         for i, (images, targets) in enumerate(train_dl):
-            loss += train_op(images.numpy(), targets.numpy(), args.learning_rate)
+            print(train_op(images.numpy(), targets.numpy(), args.learning_rate))
+            loss += 0.1
 
         num_correct = 0
         total = test_ds.__len__()
