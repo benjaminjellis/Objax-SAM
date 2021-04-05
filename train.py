@@ -85,7 +85,7 @@ if __name__ == "__main__":
         train_dl = tqdm(train_dl)
         loss = 0
         for i, (images, targets) in enumerate(train_dl):
-            print((train_op(images.numpy(), targets.numpy(), args.learning_rate)).item)
+            print(train_op(images.numpy(), targets.numpy(), args.learning_rate)[0].item())
             loss += 0.1
 
         num_correct = 0
