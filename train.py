@@ -53,11 +53,11 @@ if __name__ == "__main__":
 
         @objax.Function.with_vars(model.vars() + gv.vars() + opt.vars())
         def train_op(x, y, lr):
-            g, v = gv(x, y)
-            opt.first_step(rho = args.rho, grads = g)
-            g, v = gv(x, y)
-            opt.second_step(lr = lr, grads = g)
-            return v
+            g1, v1 = gv(x, y)
+            opt.first_step(rho = args.rho, grads = g1)
+            g2, v2 = gv(x, y)
+            opt.second_step(lr = lr, grads = g2)
+            return v1
 
     elif args.mode == "SGD":
         opt = objax.optimizer.Momentum(model.vars(), momentum = args.momentum)
